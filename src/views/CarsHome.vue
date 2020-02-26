@@ -1,13 +1,9 @@
 <template>
-  <div class="home container-fluid">
+  <div class="car-home container-fluid">
     <div class="row">
       <div class="col-12 text-right">
-        <button v-if="!carForm" @click="carForm = true" class="btn btn-success">
-          Add-Car
-        </button>
-        <button v-else @click="carForm = false" class="btn btn-danger">
-          cancel
-        </button>
+        <button v-if="!carForm" @click="carForm = true" class="btn btn-success">Add-Car</button>
+        <button v-else @click="carForm = false" class="btn btn-danger">cancel</button>
       </div>
       <div class="col-12">
         <create-car v-if="carForm" />
@@ -26,7 +22,7 @@ import Cars from "@/components/Cars";
 import CreateCar from "@/components/CreateCar";
 
 export default {
-  name: "Home",
+  name: "CarHome",
   data() {
     return {
       carForm: false

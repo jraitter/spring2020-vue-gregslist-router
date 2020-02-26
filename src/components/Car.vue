@@ -1,9 +1,7 @@
 <template>
   <div class="car col-3">
     <div class="card">
-      <router-link
-        :to="{ name: 'CarDetails', params: { carId: this.carData._id } }"
-      >
+      <router-link :to="{ name: 'CarDetails', params: { carId: this.carData._id } }">
         <img :src="carData.imgUrl" class="card-img-top" />
       </router-link>
       <div class="card-body">

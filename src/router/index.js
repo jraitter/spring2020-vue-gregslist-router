@@ -1,15 +1,17 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
+import CarsHome from "../views/CarsHome.vue";
 import CarDetails from "../views/CarDetails.vue";
+import JobsHome from "../views/JobsHome.vue"
+import JobDetails from "../views/JobDetails.vue"
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
-    name: "Home",
-    component: Home
+    name: "CarsHome",
+    component: CarsHome
   },
   {
     path: "/car/:carId",
@@ -17,7 +19,17 @@ const routes = [
     component: CarDetails
   },
   {
-    // NOTE sends user back to home on bad address
+    path: "/job",
+    name: "JobsHome",
+    component: JobsHome
+  },
+  {
+    path: "/job/:jobId",
+    name: "JobDetails",
+    component: JobDetails
+  },
+  {
+    // NOTE sends user back to root/home on bad address
     path: "*",
     redirect: "/"
   }
