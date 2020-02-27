@@ -1,18 +1,18 @@
 <template>
-  <div class="jobs-home container-fluid">
+  <div class="houses-home container-fluid">
     <div class="row">
       <div class="col text-center">
-        <h1>Welcome to Gregslist - Jobs</h1>
+        <h1>Welcome to Gregslist - Houses</h1>
       </div>
     </div>
     <div class="row">
       <div class="col">
-        <jobs />
+        <houses />
       </div>
       <div class="col">
         <div class="row">
           <div class="col">
-            <create-job />
+            <create-house />
           </div>
         </div>
       </div>
@@ -22,14 +22,14 @@
 
 
 <script>
-import Jobs from "@/components/Jobs";
-import CreateJob from "@/components/CreateJob";
+import Houses from "@/components/Houses";
+import CreateHouse from "@/components/CreateHouse";
 
 export default {
-  name: "JobsHome",
+  name: "HousesHome",
   components: {
-    Jobs,
-    CreateJob
+    Houses,
+    CreateHouse
   }
 };
 </script>

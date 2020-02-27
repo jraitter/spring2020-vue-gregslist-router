@@ -1,10 +1,18 @@
 <template>
   <div class="car-details">
-    <h1>CAR DETAILS .VUE</h1>
     <div v-if="details._id">
-      {{ details }}
+      <div class="card">
+        <img class="card-img-top" :src="details.imgUrl" alt="Card image cap" />
+        <div class="card-body">
+          <h5 class="card-title">{{details.make}} - {{details.model}} - {{details.year}}</h5>
+          <p class="card-text">
+            {{details.description}}
+            <b>${{details.price}}</b>
+          </p>
+        </div>
+      </div>
+      <button @click="deleteCar">delete</button>
     </div>
-    <button @click="deleteCar">delete</button>
   </div>
 </template>
 

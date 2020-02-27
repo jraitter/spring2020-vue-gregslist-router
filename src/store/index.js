@@ -15,7 +15,9 @@ export default new Vuex.Store({
     cars: [],
     activeCar: {},
     jobs: [],
-    activeJob: {}
+    activeJob: {},
+    houses: [],
+    activeHouse: {}
   },
   mutations: {
 
@@ -44,6 +46,18 @@ export default new Vuex.Store({
     },
     setActiveJob(state, payload) {
       state.activeJob = payload;
+    },
+    setHouses(state, payload) {
+      state.houses = payload;
+    },
+    addHouse(state, payload) {
+      state.houses.push(payload);
+    },
+    removeHouse(state, id) {
+      state.houses = state.houses.filter(h => h._id != id);
+    },
+    setActiveHouse(state, payload) {
+      state.activeHouse = payload;
     }
   },
   actions: {
@@ -141,6 +155,54 @@ export default new Vuex.Store({
     },
     setActiveJob({ commit }, job) {
       commit("setActiveJob", job);
+    },
+
+    async getHouses({ commit }) {
+      try {
+        let res = await _api.get("houses");
+        commit("setHouses", res.data.data)
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async getHouseById({ commit, dispatch }, id) {
+      try {
+        let res = await _api.get("houses/" + id);
+        commit("setActiveHouse", res.data.data); //NOTE the res.data.data is the sandbox api way of providing data
+      } catch (error) {
+        console.error(error);
+        // NOTE Push changes the route to the provided route by name
+        router.push({ name: "HousesHome" });
+      }
+    },
+    async createHouse({ commit, dispatch }, newHouse) {
+      try {
+        let res = await _api.post("houses", newHouse);
+        // dispatch("getHouses");
+        commit("addHouse", res.data.data);
+        // NOTE after the house is created, send them to the house details page for that house
+        router.push({
+          name: "HouseDetails",
+          params: { houseId: res.data.data._id }
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async deleteHouse({ commit, dispatch }, houseId) {
+      try {
+        let res = await _api.delete(`houses/${houseId}`);
+        // dispatch("getHouses");
+        commit("removeHouse", houseId);
+        commit("setActiveHouse", {});
+        // NOTE after the house is deleted, send them to the house home page for that house
+        router.push({ name: "HousesHome" });
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    setActiveHouse({ commit }, house) {
+      commit("setActiveHouse", house);
     }
   }
 });
